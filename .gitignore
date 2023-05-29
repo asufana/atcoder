@@ -1,0 +1,5 @@
+*/ex/
+*.hi
+*.o
+*/*/Main
+MainSpec.hs
