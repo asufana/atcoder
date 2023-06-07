@@ -1,4 +1,3 @@
-module Main where
 import qualified Data.IntSet as IS
 main :: IO ()
 main = do
@@ -7,12 +6,12 @@ main = do
   as <- map read . words <$> getLine :: IO [Int]
 
   let as' = zip [1..] as
-  let acc = IS.fromAscList [1..n]
-  let deleted = IS.elems $ foldl del acc as'
-  print $ length deleted
-  putStrLn $ unwords $ map show deleted
+  let lst = IS.fromAscList [1..n]
+  let as'' = IS.elems $ foldl fPickup lst as'
 
-del acc (i,ai)
-  | IS.member i acc = IS.delete ai acc
+  print $ length as''
+  putStrLn $ unwords $ map show as''
+
+fPickup acc (i,n)
+  | IS.member i acc = IS.delete n acc
   | otherwise = acc
-
