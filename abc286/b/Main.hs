@@ -4,10 +4,10 @@ main = do
   getLine
   s <- getLine :: IO String
 
-  putStrLn $ solve $ map (:[]) s
+  putStrLn $ fSolve $ map (:[]) s
 
-solve [] = []
-solve [n1] = n1
-solve [n1,n2] = if n1++n2 == "na" then "nya" else n1++n2
-solve (n1:n2:ns) = if n1++n2 == "na" then "nya" ++ solve ns else n1 ++ solve (n2:ns)
+fSolve [] = []
+fSolve [s1] = s1
+fSolve (s1:s2:ss) = if s1++s2 == "na" then "nya" ++ fSolve ss else s1 ++ fSolve (s2:ss)
+
 
