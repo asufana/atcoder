@@ -1,21 +1,13 @@
-{-# LANGUAGE TupleSections #-}
-
-import qualified Data.IntSet as IS
-import qualified Data.IntMap.Strict as IM
-import Control.Monad (replicateM)
-import Data.Maybe (fromMaybe)
-
 main :: IO ()
 main = do
 
   [n,k] <- map read . words <$> getLine :: IO [Int]
   ss <- getLine
 
-  let (acc,_) = foldl solve ([],k) $ map (:[]) ss
-  putStrLn $ reverse acc
+  let (acc,_) = foldl fSolve ([],k) ss
+  putStrLn acc
 
-solve (acc,k) s
-  | s == ['o'] && f = ('o':acc,k)
-  | otherwise = ('x':acc,k)
-  where f = length (filter (=='o') acc) < k
-
+fSolve (acc,k) s
+  | k == 0 = (acc++['x'],k)
+  | s == 'x' = (acc++['x'],k)
+  | otherwise = (acc++['o'],k-1)
