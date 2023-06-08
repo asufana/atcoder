@@ -5,9 +5,9 @@ main = do
   n <- readLn :: IO Int
   xs <- map read . words <$> getLine :: IO [Int]
 
-  let xs' = drop n $ take (5 * n - n) $ sort xs
-  let len = fromIntegral $ length xs'
-  let sm = fromIntegral $ sum xs'
-  print $ sm / len
-  
+  let xs' = take (5*n-n-n) $ reverse $ take (5*n-n) $ sort xs
+  let s = fromIntegral $ sum xs'
+  let d = fromIntegral $ length xs'
+  print $ s / d
+
 
