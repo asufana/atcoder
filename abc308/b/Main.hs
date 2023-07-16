@@ -3,9 +3,11 @@ main :: IO ()
 main = do
 
   [n,m] <- map read . words <$> getLine :: IO [Int]
-  cs <- words <$> getLine :: IO [String]
   ds <- words <$> getLine :: IO [String]
+  cs <- words <$> getLine :: IO [String]
   ps <- map read . words <$> getLine :: IO [Int]
-  let price = DM.fromList $ zip ds $ drop 1 ps
 
-  print $ sum $ map (\c -> DM.findWithDefault (head ps) c price) cs
+  let csps = DM.fromList $ zip cs $ drop 1 ps
+  let defaultPrice = head ps
+  print $ sum $ map (\d -> DM.findWithDefault defaultPrice d csps) ds
+
