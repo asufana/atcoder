@@ -1,9 +1,9 @@
 main :: IO ()
 main = do
 
-  p:_:q:_ <- getLine :: IO [Char]
+  [p,q] <- words <$> getLine :: IO [String]
 
-  let idx = zip "ABCDEFG" (scanl (+) 0 [3,1,4,1,5,9])
-  let Just x = lookup p idx
-  let Just y = lookup q idx
-  print $ abs (x - y)
+  let idx = zip ['A'..'G'] $ scanl (+) 0 [3,1,4,1,5,9]
+  let Just p' = lookup (head p) idx
+  let Just q' = lookup (head q) idx
+  print $ abs (p' - q')
