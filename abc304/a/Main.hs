@@ -1,19 +1,16 @@
 import Control.Monad (replicateM)
+import Data.List (sort, minimumBy, elemIndex)
 import Data.Ord (comparing)
-import Data.List (minimumBy)
-import Data.Maybe (fromMaybe)
+import Data.Maybe (fromJust)
 main :: IO ()
 main = do
 
   n <- readLn :: IO Int
-  ss <- replicateM n $ do
+  sa <- replicateM n $ do
     [s,a] <- words <$> getLine
-    return (s, read a::Int)
+    return (s, read a :: Int)
 
-  let m = snd $ minimumBy (comparing snd) ss
-  let i = fLookup ss m
-  let ss' = map fst $ drop (i-1) ss ++ take (i-1) ss
-  mapM_ putStrLn ss'
+  let min = minimumBy (comparing snd) sa
+  let idx = fromJust $ elemIndex min sa
 
-fLookup ss x = fromMaybe 0 $ lookup x ss'
-  where ss' = zip (map snd ss) [1..]
+  mapM_ putStrLn $ map fst $ drop idx sa ++ take idx sa
